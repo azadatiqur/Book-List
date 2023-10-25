@@ -87,7 +87,8 @@ function newBook(e) {
         UI.clearFields();
 
         UI.showAlert("Book Added!", "success");
-        
+
+        storeBookInLocalStorage(book);
     }
     
     
@@ -102,4 +103,24 @@ function removeBook(e) {
         UI.showAlert("Book Removed!", "success");
     }
     e.preventDefault();
+}
+
+function storeBookInLocalStorage(book) {
+    let books;
+    // let bookObj = { 
+    //     title: `${book.title}`,
+    //     author: `${book.author}`,
+    //     isbn: `${book.isbn}`
+    // }
+    if(localStorage.getItem('books') === null) {
+        books = [];
+        console.log('empty');
+    }
+    else {
+        books = JSON.parse(localStorage.getItem('books'));
+    }
+    
+    books.push(book);
+
+    localStorage.setItem('books', JSON.stringify(books));
 }
