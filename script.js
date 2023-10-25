@@ -90,10 +90,12 @@ function newBook(e) {
         ui.addToBookList(book);
         
         ui.clearFields();
+
+        ui.showAlert("Book Added!", "success");
         
     }
     
-    ui.showAlert("Book Added!", "success");
+    
         
     e.preventDefault();
 }
