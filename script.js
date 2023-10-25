@@ -89,6 +89,7 @@ function newBook(e) {
         
     }
     
+    ui.showAlert("Book Added!", "success");
         
     e.preventDefault();
 }
