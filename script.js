@@ -14,10 +14,7 @@ class Book {
 
 //UI Class
 class UI {
-    constructor() {
-        
-    }
-    addToBookList(book) {
+    static addToBookList(book) {
         //My manual Solution which works
         // let list = document.querySelector('#book-list');
         // let bookInfo = document.createElement('tr');
@@ -44,13 +41,13 @@ class UI {
         list.appendChild(row);
     }
 
-    clearFields() {
+    static clearFields() {
         document.querySelector('#title').value = '';
         document.querySelector('#author').value = '';
         document.querySelector('#isbn').value = '';
     }
 
-    showAlert(message, className) {
+    static showAlert(message, className) {
         let div = document.createElement('div');
         div.className = `alert ${className}`;
         div.appendChild(document.createTextNode(message));
@@ -63,7 +60,7 @@ class UI {
         }, 3000);
     }
 
-    deleteFromBook(target) {
+    static deleteFromBook(target) {
         target.parentElement.parentElement.remove();
     }
 }
@@ -79,19 +76,17 @@ function newBook(e) {
     author = document.querySelector('#author').value,
     isbn = document.querySelector('#isbn').value;
 
-    let ui = new UI();
-
     if(title === '' || author === '' || isbn === '') {
-        ui.showAlert("Please fill all the fields!", "error");
+        UI.showAlert("Please fill all the fields!", "error");
     }
     else {
         let book = new Book(title, author, isbn);
 
-        ui.addToBookList(book);
+        UI.addToBookList(book);
         
-        ui.clearFields();
+        UI.clearFields();
 
-        ui.showAlert("Book Added!", "success");
+        UI.showAlert("Book Added!", "success");
         
     }
     
@@ -102,10 +97,9 @@ function newBook(e) {
 
 function removeBook(e) {
 
-    let ui = new UI();
     if (e.target.hasAttribute('href')) {
-        ui.deleteFromBook(e.target);
-        ui.showAlert("Book Removed!", "success");
+        UI.deleteFromBook(e.target);
+        UI.showAlert("Book Removed!", "success");
     }
     e.preventDefault();
 }
