@@ -102,6 +102,7 @@ function removeBook(e) {
     if (e.target.hasAttribute('href')) {
         UI.deleteFromBook(e.target);
         UI.showAlert("Book Removed!", "success");
+        removeBookFromLocalStorage(e.target);
     }
     e.preventDefault();
 }
@@ -139,4 +140,25 @@ function getBooksFromLocalStorage() {
     books.forEach(book => {
         UI.addToBookList(book);
     });
+}
+
+function removeBookFromLocalStorage(anchorTag) {
+    let titleToDelete = anchorTag.parentElement.parentElement.children[2].textContent;
+
+    let books;
+    if(localStorage.getItem('books') === null) {
+        books = [];
+        //console.log('empty');
+    }
+    else {
+        books = JSON.parse(localStorage.getItem('books'));
+    }
+
+    books.forEach((book, index) => {
+        if (book.isbn == titleToDelete) {
+            books.splice(index, 1);
+        }
+    });
+
+    localStorage.setItem('books', JSON.stringify(books));
 }
