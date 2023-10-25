@@ -68,6 +68,7 @@ class UI {
 // Add Event Listener
 form.addEventListener('submit', newBook);
 bookList.addEventListener('click', removeBook);
+document.addEventListener('DOMContentLoaded', getBooksFromLocalStorage);
 
 //Define functions
 
@@ -114,7 +115,7 @@ function storeBookInLocalStorage(book) {
     // }
     if(localStorage.getItem('books') === null) {
         books = [];
-        console.log('empty');
+        //console.log('empty');
     }
     else {
         books = JSON.parse(localStorage.getItem('books'));
@@ -123,4 +124,19 @@ function storeBookInLocalStorage(book) {
     books.push(book);
 
     localStorage.setItem('books', JSON.stringify(books));
+}
+
+function getBooksFromLocalStorage() {
+    let books;
+    if(localStorage.getItem('books') === null) {
+        books = [];
+        //console.log('empty');
+    }
+    else {
+        books = JSON.parse(localStorage.getItem('books'));
+    }
+
+    books.forEach(book => {
+        UI.addToBookList(book);
+    });
 }
